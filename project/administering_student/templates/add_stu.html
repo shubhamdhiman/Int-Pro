@@ -1,0 +1,52 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+
+    {% comment %} Bootstrap Stylesheet {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %} ">
+
+    {% comment %} Adding our own stylesheet {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/style.css'%} ">
+</head>
+<body>
+    {% comment %} Creating Container {% endcomment %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-4">
+                
+                {% comment %} Heading {% endcomment %}
+                <h2 class='text center alert alert-info'> Add Students </h2>
+
+                <form action="" method = "POST" novalidate>
+                    {% csrf_token %}
+                    {% comment %} Adding Form {% endcomment %}
+                        {% comment %} {{form.as_p}} {% endcomment %}
+                        {% for fm in form %}
+                        <div class="form-group ">
+                            {{fm.label_tag}}{{fm}}<small class="text-warning">{{fm.errors|striptags}}</small>
+                        </div>
+                        {% endfor %}
+                        <input type="submit" class = 'btn btn-info mt-3' value = "Add">
+                        <a href="{% url 'show_stu' %}" class="btn btn-info display-inline">Student Data Table</a>
+                </form>
+
+                {% comment %} Adding Success Messages {% endcomment %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+    {% comment %} Inheriting Js Files {% endcomment %}
+    <script src = "{% static 'js/jquery.js' %} "></script>
+    <script src = "{% static 'js/popper.js' %} "></script>
+    <script src = "{% static 'js/bootstrap.js' %} "></script>
+</body>
+</html>

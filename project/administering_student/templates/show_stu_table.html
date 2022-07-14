@@ -1,0 +1,60 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Data</title>
+
+    {% comment %} Bootstrap Stylesheet {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %} ">
+</head>
+<body>
+    {% comment %} Creating container {% endcomment %}
+    <div class="container mt-10">
+       <div class="col-sm-12">
+        <h4 class = 'text-center alert alert-info'>Students Data</h4>
+        {% if stu %}
+                <table class="table table-bordered border-info table-hover">
+                    {% comment %} Table Feilds {% endcomment %}
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Date of Birth</th>
+                        <th scope="col">Physics</th>
+                        <th scope="col">Chemistry</th>
+                        <th scope="col">Math</th>
+                        <th scope="col ">Percentage (%)</th>
+                    </tr>
+                    </thead>
+                        <tbody>
+                            {% comment %} Retriving Data Dynamically from the Database {% endcomment %}
+                            {% for st in stu %}
+                                <tr>
+                                    <th scope="row">{{st.id}}</th>
+                                    <td>{{st.student_name}}</td>
+                                    <td>{{st.Date_of_Birth}}</td>
+                                    <td>{{st.Marks_in_Physics}}</td>
+                                    <td>{{st.Marks_in_Chemistry}}</td>
+                                    <td>{{st.Marks_in_Math}}</td>
+                                    <td>{{st.percent}}</td>                            
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                </table>
+                {% comment %} Adding button for adding another student into table {% endcomment %}
+                <a href="/" class=" btn btn-info">Add Student</a>
+        {% else %}
+        {% comment %} Will run when no data will be there in the table {% endcomment %}
+        <h4 class = 'text center alert alert-warning'> Oops, No Records Found !!  </h4>
+        <a href="/" class=" btn btn-info">Add Student</a>
+        {% endif %}
+       </div>
+    </div>
+    {% comment %} Inheriting Js Files {% endcomment %}
+    <script src = "{% static 'js/jquery.js' %} "></script>
+    <script src = "{% static 'js/popper.js' %} "></script>
+    <script src = "{% static 'js/bootstrap.js' %} "></script>
+</body>
+</html>
